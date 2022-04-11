@@ -1,7 +1,7 @@
 [Barbara Agena](http://lattes.cnpq.br/3888793516541327), [Insper](https://www.insper.edu.br/), 2022.
 
 <p align="center">
-  <img src="public/image/logo-getit.png" alt="Get-it" width="256">
+  <img src="notes/static/notes/image/logo-getit.png" alt="Get-it" width="256">
 </p>
 <h1 align="center">
   Get-it
