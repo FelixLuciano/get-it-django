@@ -10,7 +10,7 @@
   <i>Like the Post-it, but with another verb</i>
 </p>
 
-> As Tags podem ser editadas e removidas alterando as notas pertencentes, e as que não possuem notas são removidas. Tudo acontece automaticamente durante as requisições assíncronas. Para tanto, o projeto foi desenvolvido para atingir conceito A+.
+> As Tags podem ser editadas e removidas alterando as notas pertencentes, e as que não possuem notas são removidas. Tudo acontece automaticamente durante as requisições assíncronas. Além disso foi adicionada uma página de erro 404. Para tanto, o projeto foi desenvolvido para atingir conceito A+.
 
 ## Start database
 ```bash
