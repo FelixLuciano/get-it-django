@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-)h91f&^hoh^vyp+7e_4p_dj#z5ibav%f8e7@49q8i1bh8wtif=
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'https://evening-river-06330.herokuapp.com/',
+    'evening-river-06330.herokuapp.com',
     'localhost',
     '127.0.0.1'
 ]
