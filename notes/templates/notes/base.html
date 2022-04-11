@@ -1,5 +1,4 @@
 {% load static %}
-{% csrf_token %}
 <!DOCTYPE html>
 
 <html>
@@ -24,8 +23,5 @@
 
   <script type="text/javascript" src="{% static 'notes/js/app.js' %}"></script>
 </head>
-
-<body>
-  {% block content %}{% endblock %}
-</body>
+<body>{% csrf_token %}{% block content %}{% endblock %}</body>
 </html>
