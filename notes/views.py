@@ -2,7 +2,7 @@ import json
 
 from django.shortcuts import render
 from django.core import serializers
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse
 from django.middleware import csrf
 from .models import Tag, Note
 
@@ -152,4 +152,8 @@ def tag_view(request, tag):
 
 
 def handler404(request, exception):
-    return HttpResponseNotFound(render(request, 'notes/errors/404.html'), {})
+    response = render(request, 'notes/errors/404.html', {})
+
+    response.status_code = 500
+
+    return response
