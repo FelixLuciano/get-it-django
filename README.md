@@ -10,7 +10,7 @@
   <i>Like the Post-it, but with another verb</i>
 </p>
 
-> As Tags podem ser editadas e removidas alterando as notas pertencentes, e as que não possuem notas são removidas. Tudo acontece automaticamente durante as requisições assíncronas. Além disso foi adicionada uma página de erro 404 e todas as páginas são responsivas. Para tanto, o projeto foi desenvolvido para atingir conceito A+.
+> As múltiplas Tags de uma nota podem ser editadas e removidas alterando as notas pertencentes. Tudo acontece automaticamente durante as requisições assíncronas do aplicativo. Além disso foi adicionada uma página de erro 404 e todas as páginas são responsivas. Para tanto, o projeto foi desenvolvido para atingir conceito A+.
 
 ## See it working
 [evening-river-06330.herokuapp.com](https://evening-river-06330.herokuapp.com/)
