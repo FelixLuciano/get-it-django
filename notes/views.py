@@ -1,13 +1,16 @@
 import json
 
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.core import serializers
+from django.http import HttpResponse
+from django.middleware import csrf
 from .models import Tag, Note
 
 
 def index_view(request):
     notes = Note.objects.all()
+
+    csrf.get_token(request)
 
     return render(request, 'notes/index.html', {
         'notes': notes
