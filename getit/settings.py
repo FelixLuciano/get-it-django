@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'getit.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://localhost/getit?user=getituser&password=getitsenha',
+        default='postgresql://localhost/getit?user=jlmgnzwdfsvhoj&password=5d1a7dad1901a3791ed339f21fd8e52cafdb4076f0c7852077e9e6287aa93fcf',
         conn_max_age=600,
         ssl_require=not DEBUG
     )
