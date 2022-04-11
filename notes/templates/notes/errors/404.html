@@ -1,0 +1,61 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+<header class="page-header">
+    <div class="page-header__actions">
+        <a
+            href="/"
+            type="button"
+            class="button button--icon"
+        >
+            <img
+                src="https://api.iconify.design/ph:sticker-duotone.svg?color=%23FACC15"
+                class="button__icon"
+            >
+            Notas
+        </a>
+        <a
+            href="/tags"
+            type="button"
+            class="button button--icon"
+        >
+            <img
+                src="https://api.iconify.design/ph:tag-duotone.svg?color=%23FACC15"
+                class="button__icon"
+            >
+            Tags
+        </a>
+    </div>
+
+    <img
+        src="{% static 'notes/image/logo-getit.png' %}"
+        height="42"
+        class="page-header__logo"
+    >
+
+    <p class="page-header__slogan">
+        Como o Post-it, mas com outro verbo
+    </p>
+</header>
+
+<main class="page-container">
+    <section class="notes-board">
+        <div class="notes-board__wrap">
+            <ul class="notes-board__grid js-notes-board__grid">
+                <li  class="note-card js-note-card">
+                    <div class="note-card__title js-note-card__title">
+                        404
+                    </div>
+                
+                    <div class="note-card__bottom">
+                        <p class="note-card__content js-note-card__content">
+                            Página não encontrada!
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -20,3 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('notes.urls')),
 ]
+
+handler404 = 'notes.views.handler404'

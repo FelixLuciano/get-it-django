@@ -14,7 +14,7 @@
 
 ## Start database
 ```bash
-$ docker run --rm --name pg-docker -e POSTGRES_PASSWORD=getitsenha -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
+$ docker run --rm --name pg-docker -e POSTGRES_PASSWORD=5d1a7dad1901a3791ed339f21fd8e52cafdb4076f0c7852077e9e6287aa93fcf -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
 ```
 
 ```bash
@@ -23,11 +23,11 @@ $ psql -h localhost -U postgres
 
 ```sql
 CREATE DATABASE getit;
-CREATE USER getituser WITH PASSWORD 'getitsenha';
+CREATE USER jlmgnzwdfsvhoj WITH PASSWORD '5d1a7dad1901a3791ed339f21fd8e52cafdb4076f0c7852077e9e6287aa93fcf';
 ALTER ROLE getituser SET client_encoding TO 'utf8';
 ALTER ROLE getituser SET default_transaction_isolation TO 'read committed';
 ALTER ROLE getituser SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE getit TO getituser;
+GRANT ALL PRIVILEGES ON DATABASE getit TO jlmgnzwdfsvhoj;
 \q
 ```
 
