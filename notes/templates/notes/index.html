@@ -1,0 +1,102 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+<header class="page-header">
+    <div class="page-header__actions">
+        <a
+            href="/tags"
+            type="button"
+            class="button button--icon"
+        >
+            <img
+                src="https://api.iconify.design/ph:tag-duotone.svg?color=%23FACC15"
+                class="button__icon"
+            >
+            Tags
+        </a>
+        <button
+            type="button"
+            class="button button--icon js-button--add_note"
+        >
+            <img
+                src="https://api.iconify.design/ph:plus-circle-duotone.svg?color=%23FACC15"
+                class="button__icon"
+            >
+            Novo
+        </button>
+    </div>
+
+    <img
+        src="{% static 'notes/image/logo-getit.png' %}"
+        height="42"
+        class="page-header__logo"
+    >
+
+    <p class="page-header__slogan">
+        Como o Post-it, mas com outro verbo
+    </p>
+</header>
+
+<main class="page-container">
+    <section class="notes-board">
+        <div class="notes-board__wrap">
+            <ul class="notes-board__grid js-notes-board__grid">
+                {% for note in notes %}
+                <li  class="note-card js-note-card" data-note-id="{{note.id}}">
+                    <div class="note-card__title js-note-card__title" contenteditable>
+                        {{ note.title }}
+                    </div>
+                
+                    <div class="note-card__bottom">
+                        <p class="note-card__content js-note-card__content" contenteditable>
+                            {{ note.content }}
+                        </p>
+                
+                        <div class="note-card__actions">
+                            <button
+                                type="button"
+                                class="button button--icon js-note-card__action-button--remove"
+                            >
+                                <img
+                                    src="https://api.iconify.design/ph:minus-circle-duotone.svg?color=%23FACC15"
+                                    class="button__icon"
+                                >
+                                Remover
+                            </button>
+                        </div>
+                
+                        <button class="note-card__peel-button js-note-card__peel-button"></button>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</main>
+
+<template id="js-note-card--template">
+    <li  class="note-card js-note-card note-card--client-side">
+        <div class="note-card__title js-note-card__title" contenteditable></div>
+
+        <div class="note-card__bottom">
+            <p class="note-card__content js-note-card__content" contenteditable></p>
+
+            <div class="note-card__actions">
+                <button
+                    type="button"
+                    class="button button--icon js-note-card__action-button--remove"
+                >
+                    <img
+                        src="https://api.iconify.design/ph:minus-circle-duotone.svg?color=%23FACC15"
+                        class="button__icon"
+                    >
+                    Remover
+                </button>
+            </div>
+        
+            <button class="note-card__peel-button js-note-card__peel-button"></button>
+        </div>
+    </li>
+</template>
+{% endblock %}
