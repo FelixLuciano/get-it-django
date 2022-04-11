@@ -1,4 +1,5 @@
 import json
+import re
 
 from django.shortcuts import render
 from django.core import serializers
@@ -27,41 +28,48 @@ def notes_view(request):
         data = json.loads(request.body)
         title = data['title']
         content = data['content']
-        tag_title = data['tag']
+        tags_title = data['tags']
 
-        tag = None
-        try:
-            tag = Tag.objects.get(title=tag_title)
-        except Tag.DoesNotExist:
-            tag = Tag(title=tag_title)
-
-            tag.save()
-
-        note = Note(title=title, content=content, tag=tag)
+        note = Note(title=title, content=content)
 
         note.save()
 
-        response = serializers.serialize('json', [note], fields=('title', 'content', 'tag'))
+        for tag_title in tags_title:
+            try:
+                tag = Tag.objects.get(title=tag_title)
+
+                note.tags.add(tag)
+            except Tag.DoesNotExist:
+                tag = Tag(title=tag_title)
+
+                tag.save()
+                note.tags.add(tag)
+
+        response = serializers.serialize('json', [note], fields=('title', 'content', 'tags'))
 
         return HttpResponse(response, content_type='application/json')
     elif request.method == 'UPDATE':
         data = json.loads(request.body)
         _id = data['id']
-        tag_title = data['tag']
+        tags_title = data['tags']
 
         note = Note.objects.get(id=_id)
 
-        tag = None
-        try:
-            tag = Tag.objects.get(title=tag_title)
-        except Tag.DoesNotExist:
-            tag = Tag(title=tag_title)
+        note.tags.set([])
 
-            tag.save()
+        for tag_title in tags_title:
+            try:
+                tag = Tag.objects.get(title=tag_title)
+
+                note.tags.add(tag)
+            except Tag.DoesNotExist:
+                tag = Tag(title=tag_title)
+
+                tag.save()
+                note.tags.add(tag)
 
         note.title = data['title']
         note.content = data['content']
-        note.tag = tag
 
         note.save()
 
@@ -97,42 +105,44 @@ def tags_view(request):
     elif request.method == 'UPDATE':
         data = json.loads(request.body)
         _id = data['id']
-
         tag = Tag.objects.get(id=_id)
-
+        notes = Note.objects.filter(tags__id=tag.id)
+        old_title = tag.title
         tag.title = data['title']
 
         tag.save()
 
-        notes = Note.objects.all()
-
         for note in notes:
-            if note.tag == tag:
-                title = note.title[note.title.index(' '):]
+            regex = rf'(?<=#){old_title}(?=[#\s]|$)'
 
-                note.title = f'#{tag.title}{title}'
+            note.title = re.sub(regex, tag.title, note.title)
 
-                note.save()
+            note.save()
 
         return HttpResponse('Success!')
     elif request.method == 'DELETE':
         data = json.loads(request.body)
         _id = data['id']
+        tag = Tag.objects.get(id=_id)
+        notes = Note.objects.filter(tags__id=tag.id)
 
-        try:
-            tag = Tag.objects.get(id=_id)
+        for note in notes:
+            regex = rf'#{tag.title}\s*(?=[#\s]|$)'
 
-            tag.delete()
+            note.title = re.sub(regex, '', note.title)
 
-            return HttpResponse('Success!')
-        except Tag.DoesNotExist:
-            return HttpResponse('Note doesn\'t exist!', status='404')
+            note.save()
+
+        tag.delete()
+
+        return HttpResponse('Success!')
     else:
         tags = Tag.objects.all()
-        notes = Note.objects.all()
 
         for tag in tags:
-            if all([note.tag != tag for note in notes]):
+            notes = Note.objects.filter(tags__id=tag.id)
+            
+            if len(notes) < 1:
                 tag.delete()
 
         tags = Tag.objects.all()
@@ -143,7 +153,7 @@ def tags_view(request):
 
 
 def tag_view(request, tag):
-    notes = Note.objects.filter(tag__title=tag)
+    notes = Note.objects.filter(tags__title=tag)
 
     return render(request, 'notes/tag.html', {
         'notes': notes,
@@ -154,6 +164,6 @@ def tag_view(request, tag):
 def handler404(request, exception):
     response = render(request, 'notes/errors/404.html', {})
 
-    response.status_code = 500
+    response.status_code = 404
 
     return response

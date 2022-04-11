@@ -68,14 +68,14 @@ class Note {
     return this.node.querySelector('.js-note-card__action-button--remove')
   }
 
-  get tag () {
-    const tagMatches = this.titleInput_node.innerText.match(/^#[^\s#]+/gm)
+  get tags () {
+    const tagMatches = this.titleInput_node.innerText.match(/(?<=#)[^\s#]+/gm)
 
     if (tagMatches?.length > 0) {
-      return tagMatches[0].substring(1)
+      return new Set(tagMatches)
     }
     else {
-      return 'Notas'
+      return new Set(['Notas'])
     }
   }
   set tag (value) {
@@ -87,7 +87,7 @@ class Note {
       id: this.node.dataset.noteId,
       title: this.titleInput_node.innerText,
       content: this.contentInput_node.innerText,
-      tag: this.tag
+      tags: Array.from(this.tags.values())
     }
   }
 

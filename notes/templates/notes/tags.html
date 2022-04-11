@@ -43,14 +43,8 @@
         <div class="notes-board__wrap">
             <ul class="notes-board__grid js-notes-board__grid">
                 {% for tag in tags %}
-                <li  class="note-card js-tag-card" data-note-id="{{tag.id}}">
-                    {% if tag.title == 'Notas' %}
-                    <div class="note-card__title js-note-card__title">
-                    {% else %}
-                    <div class="note-card__title js-note-card__title" contenteditable>
-                    {% endif %}
-                        {{ tag.title }}
-                    </div>
+                <li class="note-card js-tag-card" data-note-id="{{tag.id}}">
+                    <div class="note-card__title js-note-card__title" {% if tag.title != 'Notas' %}contenteditable{% endif %}>{{ tag.title }}</div>
 
                     <div class="note-card__bottom">
                         <p class="note-card__content js-note-card__content">

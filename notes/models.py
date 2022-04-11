@@ -11,7 +11,7 @@ class Tag(models.Model):
 class Note(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag)
 
     def __str__ (self):
-        return f"[{ self.tag }] {self.title}"
+        return self.title
